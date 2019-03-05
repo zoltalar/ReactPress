@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Container, Row, Col } from 'reactstrap';
 
 import Header from './Components/Header.js';
 import Login from './Components/Login.js';
@@ -15,8 +16,14 @@ class App extends Component {
           <Router>
               <div>
                   <Header />
-                  <Route path="/register" component={ Register }></Route>
-                  <Route path="/login" component={ Login }></Route>
+                  <Container className="pt-5">
+                      <Row>
+                          <Col sm={{ size: 4, offset: 4 }}>
+                              <Route path="/register" component={ Register }></Route>
+                              <Route path="/login" component={ Login }></Route>
+                          </Col>
+                      </Row>
+                  </Container>
               </div>
           </Router>
       </div>

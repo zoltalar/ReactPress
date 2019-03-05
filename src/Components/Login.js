@@ -5,7 +5,7 @@ class Login extends Component
     render() {
         return (
             <div>
-                <p>Login</p>
+                <h3 className="mb-3">Login</h3>
             </div>
         );
     }
