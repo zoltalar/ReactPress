@@ -24,6 +24,12 @@ class Register extends Component
     }
 
     register() {
+        this.setState({ errors: {
+            name: '',
+            email: '',
+            password: ''
+        }});
+
         fetch('http://api.react-press.test/register', {
             method: 'POST',
             body: JSON.stringify(this.state)
@@ -34,16 +40,11 @@ class Register extends Component
                 .then(data => {
                     if (data.errors) {
                         this.setState({ errors: data.errors });
-                        this.errors();
                     }
                 });
         });
 
         return false;
-    }
-
-    errors() {
-
     }
 
     handleNameChange(e) {
@@ -65,19 +66,19 @@ class Register extends Component
                 <Form>
                     <FormGroup>
                         <Input type="text" name="name" placeholder="Name" onChange={this.handleNameChange} />
-                        <div className="invalid-feedback">
+                        <div className={ 'invalid-feedback' + (this.state.errors.name != '' ? ' d-block' : '') }>
                             { this.state.errors.name }
                         </div>
                     </FormGroup>
                     <FormGroup>
                         <Input type="email" name="email" placeholder="Email" onChange={this.handleEmailChange} />
-                        <div className="invalid-feedback">
+                        <div className={ 'invalid-feedback' + (this.state.errors.email != '' ? ' d-block' : '') }>
                             { this.state.errors.email }
                         </div>
                     </FormGroup>
                     <FormGroup>
                         <Input type="password" name="password" placeholder="Password" onChange={this.handlePasswordChange} />
-                        <div className="invalid-feedback">
+                        <div className={ 'invalid-feedback' + (this.state.errors.password != '' ? ' d-block' : '') }>
                             { this.state.errors.password }
                         </div>
                     </FormGroup>
