@@ -18,7 +18,7 @@ class App extends Component {
                   <Header />
                   <Container className="pt-5">
                       <Row>
-                          <Col sm={{ size: 4, offset: 4 }}>
+                          <Col md={{ size: 4, offset: 4 }}>
                               <Route path="/register" component={ Register }></Route>
                               <Route path="/login" component={ Login }></Route>
                           </Col>
