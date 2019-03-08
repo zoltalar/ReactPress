@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Input } from 'reactstrap';
+import { Alert, Button, Form, FormGroup, Input } from 'reactstrap';
 
 class Register extends Component
 {
@@ -10,6 +10,7 @@ class Register extends Component
             name: '',
             email: '',
             password: '',
+            registered: false,
             errors: {
                 name: '',
                 email: '',
@@ -32,7 +33,11 @@ class Register extends Component
 
         fetch('http://api.react-press.test/register', {
             method: 'POST',
-            body: JSON.stringify(this.state)
+            body: JSON.stringify({
+                name: this.state.name,
+                email: this.state.email,
+                password: this.state.password
+            })
         })
         .then((response) => {
             response
@@ -40,6 +45,8 @@ class Register extends Component
                 .then(data => {
                     if (data.errors) {
                         this.setState({ errors: data.errors });
+                    } else if (data.message) {
+                        this.setState({ registered: true });
                     }
                 });
         });
@@ -63,7 +70,10 @@ class Register extends Component
         return (
             <div>
                 <h3 className="mb-3">Register</h3>
-                <Form>
+                <Alert color="success" isOpen={this.state.registered}>
+                    Registration successful.
+                </Alert>
+                <Form className={this.state.registered ? 'd-none' : ''}>
                     <FormGroup>
                         <Input type="text" name="name" placeholder="Name" onChange={this.handleNameChange} />
                         <div className={ 'invalid-feedback' + (this.state.errors.name != '' ? ' d-block' : '') }>
