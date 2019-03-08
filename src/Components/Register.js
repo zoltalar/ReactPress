@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Alert, Button, Form, FormGroup, Input } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class Register extends Component
 {
@@ -71,7 +72,7 @@ class Register extends Component
             <div>
                 <h3 className="mb-3">Register</h3>
                 <Alert color="success" isOpen={this.state.registered}>
-                    Registration successful.
+                    Registration successful. <Link to="/login">Login</Link>
                 </Alert>
                 <Form className={this.state.registered ? 'd-none' : ''}>
                     <FormGroup>
