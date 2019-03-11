@@ -33,24 +33,27 @@ class Register extends Component
         }});
 
         fetch('http://api.react-press.test/register', {
-            method: 'POST',
-            body: JSON.stringify({
-                name: this.state.name,
-                email: this.state.email,
-                password: this.state.password
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: this.state.name,
+                    email: this.state.email,
+                    password: this.state.password
+                })
             })
-        })
-        .then((response) => {
-            response
-                .json()
-                .then(data => {
-                    if (data.errors) {
-                        this.setState({ errors: data.errors });
-                    } else if (data.message) {
-                        this.setState({ registered: true });
-                    }
-                });
-        });
+            .then((response) => {
+                response
+                    .json()
+                    .then(data => {
+                        if (data.errors) {
+                            this.setState({ errors: data.errors });
+                        } else if (data.message) {
+                            this.setState({ registered: true });
+                        }
+                    });
+            });
 
         return false;
     }
